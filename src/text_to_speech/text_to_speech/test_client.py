@@ -18,6 +18,7 @@ class MinimalClientAsync(Node):
 
     def send_request(self, text):
         self.req.text = text
+        
         # self.req.b = b
         return self.cli.call_async(self.req)
 
