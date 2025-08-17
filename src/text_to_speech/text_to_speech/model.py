@@ -24,5 +24,5 @@ class ZonosModel():
         codes = self.model.generate(conditioning)
         wavs = self.model.autoencoder.decode(codes).cpu()
 
-        torchaudio.save("sample.wav", wavs[0], self.model.autoencoder.sampling_rate)
+        torchaudio.save("/src/text_to_speech/text_to_speech/sample.wav", wavs[0], self.model.autoencoder.sampling_rate)
         
