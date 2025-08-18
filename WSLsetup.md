@@ -134,7 +134,7 @@ restart wsl for it to take effect
 
 ## Downloading PyTorch 
 ```bash
-pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu129
 ```
 
 ## Virtual environment debugging
