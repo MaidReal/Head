@@ -73,7 +73,7 @@ pyenv activate ros2env
 ```bash
 python -m pip install --upgrade pip
 
-pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame
+pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame pyyaml
 ```
 
 
@@ -136,3 +136,18 @@ restart wsl for it to take effect
 ```bash
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
 ```
+
+## Virtual environment debugging
+
+I got no clue how it worked but
+
+
+```bash
+# After you colcon build, check install/package_name/lib/package_name/name_of_the_executable or run
+head -1 /home/jeff06/Head/install/text_to_speech/lib/text_to_speech/service
+```
+
+If head returns something like `#!/usr/bin/python3` then it's using the systems python, not the virtual environment. 
+
+> [!Note]
+> `colcon build` works fine, it properly searches through `setup.cfg` and looks at the `build_scripts`. However, `colcon build --symlink-install` is a dummy and ignores (?) the `build_scripts`. 
