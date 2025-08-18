@@ -38,6 +38,15 @@ echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 ## Pyenv
 
 ```bash
+
+# download all dependencies
+sudo apt install -y make build-essential libssl-dev zlib1g-dev   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm   libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev   libffi-dev liblzma-dev git
+
+# install pyenv
+curl https://pyenv.run | bash
+
+
+# go into bash
 nano ~/.bashrc
 
 #add this to it
@@ -62,12 +71,9 @@ pyenv activate ros2env
 
 ### Python packages needed:
 ```bash
-pip install lark-parser
-pip install numpy
-pip install empy
-pip install catkin_pkg
-pip install setuptools wheel
-pip install pygame
+python -m pip install --upgrade pip
+
+pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame
 ```
 
 
@@ -92,6 +98,41 @@ pyenv virtualenvs
 ```
 
 ## Cuda with WSL
+follow this guide: `https://www.youtube.com/watch?v=R4m8YEixidI`
+
 Go to `cuda toolkit <cuda_version>` and pick linux, x86_64, wsl-ubuntu, 2.0, local
 
-follow this guide: `https://www.youtube.com/watch?v=R4m8YEixidI`
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+
+sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+
+wget https://developer.download.nvidia.com/compute/cuda/12.9.0/local_installers/cuda-repo-wsl-ubuntu-12-9-local_12.9.0-1_amd64.deb
+
+sudo dpkg -i cuda-repo-wsl-ubuntu-12-9-local_12.9.0-1_amd64.deb
+
+sudo cp /var/cuda-repo-wsl-ubuntu-12-9-local/cuda-*-keyring.gpg /usr/share/keyrings/
+
+sudo apt-get update
+
+sudo apt-get -y install cuda-toolkit-12-9
+```
+
+### Adding cuda to the PATH:
+
+```bash
+
+#go into bashrc
+nano ~/.bashrc
+
+#add 
+export PATH=$PATH:/usr/local/cuda/bin
+
+```
+restart wsl for it to take effect
+
+
+## Downloading PyTorch 
+```bash
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
+```
