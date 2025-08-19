@@ -54,19 +54,22 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+#source the new bash
+source ~/.bashrc
+
 # Get the current python version
 python3 --version
 
 # Install current python version
 pyenv install <version>
 
-# Enable system site-packages in venv
-pyenv virtualenv --system-site-packages <version> ros2env
+# Enable system site-pa+-++-+--+------------------------------------+--++ckages in venv
+pyenv virtualenv --system-site-packages <version> ros2_env
 
 # source ros2 if not yet
 source /opt/ros/jazzy/setup.bash
 
-pyenv activate ros2env
+pyenv activate ros2_env
 ```
 
 ### Python packages needed:
@@ -151,3 +154,41 @@ If head returns something like `#!/usr/bin/python3` then it's using the systems 
 
 > [!Note]
 > `colcon build` works fine, it properly searches through `setup.cfg` and looks at the `build_scripts`. However, `colcon build --symlink-install` is a dummy and ignores (?) the `build_scripts`. 
+
+## Audio in WSL
+
+### Troubleshooting PulseAudio
+Trying to get pulseaudio working on wsl however all of the old and even some of the new resources on google are terrible. 
+
+`WSLg` comes with pulse audio installed as a package (Windows 11 perk). Therefore if you run:
+```bash
+wsl --version
+```
+you should get something with WSLg
+
+then inside of your WSL, just run 
+```bash
+export PULSE_SERVER=unix:/mnt/wslg/PulseServer
+```
+
+To test it run:
+```bash
+paplay /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga 
+```
+
+you should hear sounds coming from the desktop speaker.
+
+### Installing Pulseaudio
+```bash
+sudo apt install -y pulseaudio-utils
+```
+
+test recording audio with:
+```bash
+parecord --device=2 test.wav
+```
+
+Listen to it:
+```bash
+paplay test.wav
+```
