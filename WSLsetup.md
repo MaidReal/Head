@@ -192,3 +192,16 @@ Listen to it:
 ```bash
 paplay test.wav
 ```
+
+## Transcriber (Whisper OpenAI)
+
+```bash
+pip install -U openai-whisper
+```
+
+```bash
+sudo apt update && sudo apt install ffmpeg
+```
+
+> [!Note]
+> So easy to setup omg i love OpenAI

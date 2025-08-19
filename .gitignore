@@ -4,3 +4,4 @@ src/log
 /build
 /install
 /log
+recorded_audio.*
