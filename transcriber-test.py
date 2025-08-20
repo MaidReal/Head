@@ -1,6 +1,2 @@
-import whisper
-
-model = whisper.load_model("turbo")
-result = model.transcribe("recorded_audio.wav")
-# print(result["text"])
-print(result)
+import sounddevice as sd
+print(sd.query_devices())

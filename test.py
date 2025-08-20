@@ -41,7 +41,6 @@ try:
     with sd.InputStream(channels=CHANNELS, samplerate=SAMPLE_RATE, callback=audio_callback, blocksize=int(SAMPLE_RATE*CHUNK_DURATION)):
         while True:
             sd.sleep(500)
-            # pass
 except KeyboardInterrupt:
     print("Recording stopped.")
 

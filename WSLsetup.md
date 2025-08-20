@@ -76,7 +76,12 @@ pyenv activate ros2_env
 ```bash
 python -m pip install --upgrade pip
 
-pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame pyyaml
+# for sounddevice
+sudo apt-get install libportaudio2 libportaudiocpp0 portaudio19-dev
+sudo apt install -y python3-pip portaudio19-dev pulseaudio libpulse-dev
+
+
+pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame pyyaml sounddevice
 ```
 
 
@@ -132,7 +137,14 @@ nano ~/.bashrc
 export PATH=$PATH:/usr/local/cuda/bin
 
 ```
-restart wsl for it to take effect
+restart wsl for it to take effect **or** `source ~/.bashrc`
+
+check with
+
+```bash
+echo $PATH
+```
+at the end it should say **/usr/local/cuda/bin**
 
 
 ## Downloading PyTorch 
@@ -174,6 +186,9 @@ export PULSE_SERVER=unix:/mnt/wslg/PulseServer
 To test it run:
 ```bash
 paplay /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga 
+
+# or 
+paplay /usr/share/sounds/alsa/Front_Center.wav 
 ```
 
 you should hear sounds coming from the desktop speaker.
@@ -186,12 +201,18 @@ sudo apt install -y pulseaudio-utils
 test recording audio with:
 ```bash
 parecord --device=2 test.wav
+
+# to find the device, (RDPSource is the mic). SUSPENDED means it will be turned on when you start recording
+pactl list short sources
 ```
 
 Listen to it:
 ```bash
 paplay test.wav
 ```
+
+## VAD (Silero)
+No need to install it if you alread have pytorch installed
 
 ## Transcriber (Whisper OpenAI)
 
