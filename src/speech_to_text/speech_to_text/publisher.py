@@ -1,5 +1,6 @@
 import rclpy
 from rclpy.node import Node
+import time
 
 from std_msgs.msg import String
 from speech_to_text.models.vad_model import SileroModel
@@ -15,32 +16,28 @@ class MinimalPublisher(Node):
         self.timer_object = self.create_timer(timer_period, self.timer_callback)
         self.WAV_OUTPUT_PATH = "src/speech_to_text/speech_to_text/recorded_audio.wav" 
         self.threshold = 2 # seconds
-        self.current = self.get_clock().now()
-        self.last_spoken = self.get_clock().now()
-
+        self.cur = time.time()
+        self.prev = self.cur
+        self.buffer = False # ensures that it won't save every threshold seconds
         
     def timer_callback(self):
         msg = String()
         speaking = self.model.get_is_speaking()
-        now = self.get_clock().now()
-        
+    
         if speaking:
             data = "Speaking"
-            self.last_spoken = now
+            self.buffer = True
+            self.prev = self.cur
         else:
             data = "Silent"
 
-        sec_now, nsec_now = now.seconds_nanoseconds()
-        sec_last, nsec_last = self.last_spoken.seconds_nanoseconds()
 
-        time_difference = sec_now - sec_last + (nsec_now - nsec_last) / 1e9
-
-        if time_difference > self.threshold:
+        if ((self.cur - self.prev) > self.threshold) and self.buffer:
             self.get_logger().info(f'Saving audio file to {self.WAV_OUTPUT_PATH}')
-            self.model.save_recording()  # Save the buffered audio
-            self.last_spoken = now  # reset the timer after saving
-            
-        self.current = self.get_clock().now()
+            self.model.save_recording(self.WAV_OUTPUT_PATH)  # Save the buffered audio
+            self.buffer = False
+            data = "Saved"
+        self.cur = time.time()
         msg.data = data
         self.publisher_.publish(msg)
         self.get_logger().info('Publishing: "%s"' % msg.data)

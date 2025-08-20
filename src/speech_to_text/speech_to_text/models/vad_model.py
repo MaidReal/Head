@@ -17,7 +17,6 @@ class SileroModel():
         self.SAMPLE_RATE = 16000  # Silero VAD requires 16 kHz
         self.CHUNK_DURATION = 1  # seconds, shorter chunk times didn't work as well
         self.CHANNELS = 1
-        self.WAV_OUTPUT_PATH = 'recorded_audio.wav'
         
         self.speaking = False
         
@@ -50,16 +49,15 @@ class SileroModel():
     def get_is_speaking(self):
         return self.speaking
         
-    def save_recording(self):
+    def save_recording(self, path):
         # Save the recorded audio to WAV
         recorded_audio_np = np.array(SileroModel.recorded_audio)
         recorded_audio_np = (recorded_audio_np * 32767).astype(np.int16)  # convert to 16-bit PCM
 
-        with wave.open(self.WAV_OUTPUT_PATH, 'w') as wf:
+        with wave.open(path, 'w') as wf:
             wf.setnchannels(self.CHANNELS)
             wf.setsampwidth(2)  # 16-bit
             wf.setframerate(self.SAMPLE_RATE)
             wf.writeframes(recorded_audio_np.tobytes())
         
         SileroModel.recorded_audio = [] # erase all previous conversation
-        print(f"Audio saved to {self.WAV_OUTPUT_PATH}")

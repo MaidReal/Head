@@ -21,9 +21,8 @@ class MinimalSubscriber(Node):
     def listener_callback(self, msg):
         self.get_logger().info('I heard: "%s"' % msg.data)
         
-
-            
-        
+        if msg.data == "Saved":
+            self.get_logger().info("Starting transcriber")
         
 
 
