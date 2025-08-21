@@ -11,7 +11,6 @@ Follow the ros2 installation guidelines
 
 ## Terminator:
 
-
 ```bash
 # Sudo apt update first
 sudo apt update
@@ -21,19 +20,6 @@ sudo apt install terminator
 then just type `terminator` in the terminal
  
 color font: #380C2A
-
-
-## Ros2
-Install video: https://www.youtube.com/watch?v=cLpVG51EImQ
-
-to avoid having to source ros2 everytime you open a new terminal:
-```bash
-echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
-```
-
-> [!tip]
-> `colcon build --symlink-install` reflects the changes automatically, so you dont have to rebuild it everytime you change something
-
 
 ## Pyenv
 
@@ -72,19 +58,6 @@ source /opt/ros/jazzy/setup.bash
 pyenv activate ros2_env
 ```
 
-### Python packages needed:
-```bash
-python -m pip install --upgrade pip
-
-# for sounddevice
-sudo apt-get install libportaudio2 libportaudiocpp0 portaudio19-dev
-sudo apt install -y python3-pip portaudio19-dev pulseaudio libpulse-dev
-
-
-pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame pyyaml sounddevice
-```
-
-
 List of commands for pyenv
 ```bash
 #List of commands for pyenv
@@ -104,6 +77,29 @@ pyenv virtualenv 3.10.7 rl-env
 #list all virtual environments
 pyenv virtualenvs
 ```
+
+### Python packages needed:
+```bash
+python -m pip install --upgrade pip
+
+# for sounddevice
+sudo apt-get install libportaudio2 libportaudiocpp0 portaudio19-dev
+sudo apt install -y python3-pip portaudio19-dev pulseaudio libpulse-dev
+
+
+pip install lark-parser numpy empy catkin_pkg setuptools wheel pygame pyyaml sounddevice
+```
+
+## Ros2
+Install video: https://www.youtube.com/watch?v=cLpVG51EImQ
+
+to avoid having to source ros2 everytime you open a new terminal:
+```bash
+echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+```
+
+> [!tip]
+> `colcon build --symlink-install` reflects the changes automatically, so you dont have to rebuild it everytime you change something
 
 ## Cuda with WSL
 follow this guide: `https://www.youtube.com/watch?v=R4m8YEixidI`
