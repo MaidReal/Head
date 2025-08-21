@@ -36,7 +36,7 @@ class MinimalPublisher(Node):
             self.get_logger().info(f'Saving audio file to {self.WAV_OUTPUT_PATH}')
             self.model.save_recording(self.WAV_OUTPUT_PATH)  # Save the buffered audio
             self.buffer = False
-            data = "Saved"
+            data = f"Saved,{self.WAV_OUTPUT_PATH}"
         self.cur = time.time()
         msg.data = data
         self.publisher_.publish(msg)

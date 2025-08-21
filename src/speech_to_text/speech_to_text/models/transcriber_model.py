@@ -1,9 +1,9 @@
 import whisper
 
 class WhisperModel():
-    def __init__():
+    def __init__(self):
         self.model = whisper.load_model("turbo")
     
-    def transcribe(path):
-        result = model.transcribe(path)
+    def transcribe(self, path):
+        result = self.model.transcribe(path)
         return result
