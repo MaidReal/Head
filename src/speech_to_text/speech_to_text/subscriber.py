@@ -14,19 +14,24 @@ class MinimalSubscriber(Node):
             'topic',
             self.listener_callback,
             10)
+        self.call_llama = self.create_publisher(String, '/llama_input', 10)
+        
         self.subscription  # prevent unused variable warning
         self.model = WhisperModel()
         
         
 
     def listener_callback(self, msg):
+        llama_msg = String()
         self.get_logger().info('I heard: "%s"' % msg.data)
         
         if "Saved" in msg.data:
             self.get_logger().info("Starting transcriber")
             msg_list = msg.data.split(",") # [Saved, Path]
             transcribed_message = self.model.transcribe(msg_list[1])
-            self.get_logger().info(f"Transcribed message: {transcribed_message['text']}")
+            llama_msg.data = transcribed_message['text']
+            self.call_llama.publish(llama_msg)
+            self.get_logger().info(f"Sending transcribed message: {transcribed_message['text']}")
         
 
 
