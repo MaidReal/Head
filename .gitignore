@@ -5,3 +5,5 @@ src/log
 /install
 /log
 recorded_audio.*
+/venv
+/venv-maid
