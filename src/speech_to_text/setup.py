@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'subscriber = speech_to_text.subscriber:main',
-            'client = speech_to_text.publisher:main',
+            'stt_model = speech_to_text.stt_model:main',
+            'listener = speech_to_text.listener:main',
         ],
     },
 )

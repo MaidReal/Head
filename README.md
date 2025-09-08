@@ -93,11 +93,46 @@ sudo apt-get -y install cuda-toolkit-12-9
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu129
 ```
 
-#### 6. Additional Tools
-- Terminator: `sudo apt install terminator`
+#### 6. Additional Tools 
+- Terminator: `sudo apt install terminator` (optional)
 - FFmpeg: `sudo apt update && sudo apt install ffmpeg`
 
 ---
+
+## Run files
+Export workspace root for zonos:
+```bash
+export WORKSPACE_ROOT=/ # Add path to your ros2_ws here
+```
+
+in root directory (Head) run:
+```bash
+colcon build
+```
+
+source install:
+```bash
+source install/setup.bash
+```
+
+
+### Text to Speech 
+```bash
+ros2 run text_to_speech service
+```
+
+### Speech to Text
+
+Listen through microphone:
+```bash
+ros2 run speech_to_text listener
+```
+
+Running the model:
+```bash
+ros2 run speech_to_text stt_model
+```
+
 
 ## Notes
 - For ROS2 setup, see official documentation and consider adding `source /opt/ros/jazzy/setup.bash` to your `~/.bashrc`.
