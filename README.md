@@ -100,6 +100,11 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 ---
 
 ## Run files
+Export workspace root for zonos:
+```bash
+export WORKSPACE_ROOT=/ # Add path to your ros2_ws here
+```
+
 in root directory (Head) run:
 ```bash
 colcon build
