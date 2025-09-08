@@ -1,0 +1,21 @@
+# Core utilities
+setuptools
+wheel
+pyyaml
+numpy
+pygame
+sounddevice
+lark-parser
+empy
+catkin_pkg
+
+# Whisper (requires ffmpeg installed via apt)
+openai-whisper
+
+# PyTorch + audio (CUDA 12.9 build, if GPU is available)
+torch
+torchvision
+torchaudio
+
+# Optional speech/VAD
+# silero-vad is included inside PyTorch models, no extra pip needed
