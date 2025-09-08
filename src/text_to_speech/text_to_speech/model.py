@@ -4,7 +4,7 @@ import sys
 import os
 
 
-workspace_root = '/home/jeff06/Head'
+workspace_root = os.environ.get('WORKSPACE_ROOT')
 if workspace_root is None:
     raise RuntimeError("Environment variable WORKSPACE_ROOT not set")
 zonos_path = os.path.join(workspace_root, 'src', 'resources', 'Zonos')
