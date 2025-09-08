@@ -1,0 +1,3 @@
+[submodule "src/brain"]
+	path = src/brain
+	url = https://github.com/MaidReal/brain.git
