@@ -16,7 +16,7 @@ This project provides a wrapper for large language models (LLMs) and related aud
 ---
 
 ## Quick Setup
-### Option A: Automated
+### Option A: Automated (only tested with wsl)
 Make `setup.sh` executable and run:
 ```bash
 chmod +x setup.sh
@@ -52,11 +52,20 @@ chmod +x setup.sh
   pyenv activate <env_name>
   ```
 
+## Submodules setup
+To grab all of the submodules just run:
+```bash
+git submodule update --init
+```
+
 #### 2. Python Packages
 Upgrade pip and install requirements:
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt --upgrade
+pip install --user -U nltk
+
+python src/lip_sync/misc/download_nltk.py
 ```
 
 #### 3. Audio in WSL
@@ -96,7 +105,6 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 #### 6. Additional Tools 
 - Terminator: `sudo apt install terminator` (optional)
 - FFmpeg: `sudo apt update && sudo apt install ffmpeg`
-
 ---
 
 ## Run files
@@ -114,7 +122,27 @@ source install:
 ```bash
 source install/setup.bash
 ```
+### Gaze tracking
+```bash
+ros2 run gaze_tracking head_tracker
+```
 
+### Lip Sync
+```bash
+ros2 run lip_sync lip_sync_sub
+```
+
+### Brain
+
+Server:
+```bash
+llama-server -m models/gpt-oss-20b.gguf --jinja -ngl 99 -fa --n-cpu-moe
+```
+
+Bridge:
+```bash
+ros2 launch brain llama_bridge.launch.py
+```
 
 ### Text to Speech 
 ```bash

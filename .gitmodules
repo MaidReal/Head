@@ -1,3 +1,9 @@
 [submodule "src/brain"]
 	path = src/brain
 	url = https://github.com/MaidReal/brain.git
+[submodule "src/gaze_tracking"]
+	path = src/gaze_tracking
+	url = https://github.com/MaidReal/gaze_tracking.git
+[submodule "src/lip_sync"]
+	path = src/lip_sync
+	url = https://github.com/MaidReal/lip_sync.git

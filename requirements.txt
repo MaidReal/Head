@@ -8,6 +8,11 @@ sounddevice
 lark-parser
 empy
 catkin_pkg
+opencv-python
+mediapipe
+scipy
+pyautogui
+keyboard
 
 # Whisper (requires ffmpeg installed via apt)
 openai-whisper
