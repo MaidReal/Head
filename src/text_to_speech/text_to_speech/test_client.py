@@ -17,15 +17,13 @@ class MinimalClientAsync(Node):
         self.req = TextToSpeech.Request()
 
     def send_request(self, text):
-        self.req.text = text
-        
+        self.req.text = text        
         # self.req.b = b
         return self.cli.call_async(self.req)
 
-
 def main():
     rclpy.init()
-
+    
     minimal_client = MinimalClientAsync()
     future = minimal_client.send_request(sys.argv[1])
     rclpy.spin_until_future_complete(minimal_client, future)

@@ -32,7 +32,6 @@ class MinimalService(Node):
 
         while pygame.mixer.music.get_busy():  # wait until playback finishes
             pygame.time.Clock().tick(10)
-
 def main():
     rclpy.init()
 
